@@ -11,13 +11,6 @@ POSITIONS_ORDER = [
     ["GK"]
 ]
 
-TEAM_BASE_GRID = {
-    0: [],
-    1: [],
-    3: [],
-    4: []
-}
-
 
 def get_line_by_position(position: str) -> int:
     for line_number, line in enumerate(POSITIONS_ORDER):
@@ -54,7 +47,12 @@ class Team:
 
     def get_team_grid(self):
         if self.team_grid is None:
-            team_grid = TEAM_BASE_GRID
+            team_grid = {
+                0: [],
+                1: [],
+                3: [],
+                4: []
+            }
             for player in self.data:
                 player_line = get_line_by_position(player[0])
                 if player_line not in team_grid:

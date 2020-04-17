@@ -5,6 +5,7 @@ from super_draft.utils import get_authenticated_service
 from super_draft.tournament import Tournament
 import twitter
 
+
 def main():
     service = get_authenticated_service(os.getcwd() + "/token.pickle")
     tournament = Tournament(service, os.environ["SPREADSHEET_ID"])
