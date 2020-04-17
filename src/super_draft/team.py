@@ -81,8 +81,13 @@ class Team:
             return f.read()
 
     def announce(self, tweeter_api):
+        changes = self.get_team_changes()
+
+        if len(changes) == 0:
+            return
+
         player_string = []
-        for change in self.get_team_changes():
+        for change in changes:
             player_string.append(" - {0} z sezonów {1}".format(change[1], change[2]))
         message = "Drużyna {0} wydraftowała:\n{1}".format(self.name, "\n".join(player_string))
 
