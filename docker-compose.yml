@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+  base:
+    image: super-draft
+    build:
+      context: .
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+
+  worker:
+    extends:
+      service: base
+    command: python src/worker.py
+
+  start-tournament:
+    extends:
+      service: base
+    command: python src/start-tournament.py
