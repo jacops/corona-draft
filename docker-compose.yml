@@ -8,14 +8,19 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - ./data:/app/data
 
   worker:
     extends:
       service: base
-    command: python src/worker.py
+    command: python worker.py
 
   start-tournament:
     extends:
       service: base
-    command: python src/start-tournament.py
+    command: python start-tournament.py
+
+  generate-token-pickle:
+    extends:
+      service: base
+    command: python generate-token-pickle.py

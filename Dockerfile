@@ -39,6 +39,7 @@ WORKDIR /app
 COPY entrypoint.sh .
 ENTRYPOINT ["./entrypoint.sh"]
 
-COPY src/worker.py src/
+COPY src/worker.py src/start-tournament.py src/generate-token-pickle.py ./
+COPY templates ./templates
 
-CMD ["python", "src/worker.py"]
+CMD ["python", "worker.py"]

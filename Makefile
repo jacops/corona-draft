@@ -1,6 +1,6 @@
 .PHONY: build
 
-build-docker:
+docker-build:
 	@docker-compose build
 
 docker-worker:
@@ -8,6 +8,9 @@ docker-worker:
 
 docker-start-tournament:
 	@docker-compose run --rm start-tournament
+
+docker-generate-token-pickle:
+	@docker-compose run --rm generate-token-pickle
 
 generate-token-pickle:
 	pipenv run python src/generate-token-pickle.py
