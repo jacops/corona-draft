@@ -1,4 +1,6 @@
 import pickle
+import markdown
+from pyppeteer import launch
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
@@ -30,3 +32,17 @@ def get_line_by_position(position: str) -> int:
             if line_position == position:
                 return line_number
     raise Exception("Unknown position: {}".format(position))
+
+
+async def generate_png(source_path: str, output_path: str, clip: dict = None) -> None:
+    browser = await launch(args=['--no-sandbox'])
+    page = await browser.newPage()
+    await page.goto("file://" + source_path)
+    await page.screenshot({'path': output_path, "fullPage": True, 'clip': clip})
+    await browser.close()
+
+
+def generate_html_from_markdown(content: str, output_path: str) -> None:
+    md = markdown.Markdown()
+    with open(output_path, 'w') as f:
+        f.write(md.convert(content))

@@ -39,3 +39,8 @@ def get_spreadsheet_id() -> str:
 
 def get_data_source_yaml_file() -> str:
     return os.environ["DATA_SOURCE_YAML_FILE"]
+
+
+def get_rules() ->str:
+    with open(os.environ["RULES_FILE"]) as f:
+        return f.read()

@@ -1,15 +1,24 @@
+import asyncio
 import os
 from . import config
 from . import models
+from . import utils
 from .models import Tournament
 from .repository import YamlRepository
 from .repository import SpreadsheetRepository
-from .lineup_generator import generate_lineup
+from .models import generate_lineup
 
 
 def start_tournament() -> None:
     yaml_repository = YamlRepository(config.get_data_source_yaml_file())
     spreadsheet_repository = SpreadsheetRepository(config.get_spreadsheet_api(), config.get_spreadsheet_id())
+
+    rules_html_file = os.getcwd() + '/data/rules.html'
+    rules_png_file = os.getcwd() + '/data/rules.png'
+    utils.generate_html_from_markdown(config.get_rules(), rules_html_file)
+    asyncio.get_event_loop().run_until_complete(
+        utils.generate_png(rules_html_file, rules_png_file)
+    )
 
     tournament_metadata = spreadsheet_repository.get_tournament_metadata()
 
@@ -22,7 +31,10 @@ def start_tournament() -> None:
         "\n".join(list(map(lambda x: " - " + x, tournament_metadata["teams"])))
     )
 
-    tweet_id = config.get_twitter_api().PostUpdate(status=message).id_str
+    tweet_id = config.get_twitter_api().PostUpdate(
+        status=message,
+        media=rules_png_file
+    ).id_str
     tournament = Tournament(tournament_metadata["name"], {"tweet_id": tweet_id})
 
     for team_name in tournament_metadata["teams"]:
