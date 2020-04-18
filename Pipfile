@@ -12,6 +12,7 @@ google-auth-oauthlib = "*"
 jinja2 = "*"
 pyppeteer = "*"
 python-twitter = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"
