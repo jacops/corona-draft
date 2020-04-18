@@ -24,3 +24,5 @@ services:
     extends:
       service: base
     command: python generate-token-pickle.py
+    volumes:
+      - ./credentials.json:/app/credentials.json
