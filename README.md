@@ -12,12 +12,11 @@ Wsparcie dla piłkarskiego draftu poprzez integracjęz Google Spreadsheets + Twi
 
 ## Setup
 
-* Utwórz Google spreadsheet na podstawie `samples/tournament.xlsx`
+* Utwórz Google spreadsheet na podstawie `samples/tournament.xlsx`. Nazwa spreadsheetu, będzie nazwą turnieju
 * Zbuduj Docker image - `make build` 
 * Pobierz plik do głównego katalogu `credentials.json` (https://developers.google.com/sheets/api/quickstart/python -> Step 1)
 * Przekonwertuj ściągnięty plik na binarkę: `make generate-token-pickle`
 * Utwórz plik `.env` na podstawie `.env.dist`
-    * Nadaj nazwę turniejowi zmianijąc zmienną`TOURNAMENT_NAME`
     * Uzupełnij `SPREADSHEET_ID` wklejając ID Google spreadsheetu, który utworzyłeś na początku
     * Uzupełnij `TOKEN_PICKLE` wartością polecenia `cat token.pickle|base64`
     * Uzupełnij klucze dla Twittera (https://docs.inboundnow.com/guide/create-twitter-application/)
