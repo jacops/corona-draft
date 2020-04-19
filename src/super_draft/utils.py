@@ -1,5 +1,4 @@
 import pickle
-import markdown
 from jinja2 import Template
 from pyppeteer import launch
 from google_auth_oauthlib.flow import InstalledAppFlow

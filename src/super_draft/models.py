@@ -1,4 +1,5 @@
 import asyncio
+import markdown
 from typing import List
 from . import utils
 from jinja2 import Template
@@ -120,3 +121,11 @@ def generate_lineup(team: Team, output_path: str) -> str:
     )
 
     return output_path + "/lineup.png"
+
+
+def generate_info_html(rules: str, tournament: Tournament, output_path: str) -> None:
+    md = markdown.Markdown()
+    with open('templates/rules.html') as f:
+        with open(output_path, "wt") as html_file:
+            template = Template(f.read())
+            html_file.write(template.render(rules=md.convert(rules), tournament=tournament))

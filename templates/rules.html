@@ -217,6 +217,14 @@ footer {
     <section>
         {{ rules }}
     </section>
+    <section>
+        <h2>Drużyny:</h2>
+        <ul>
+            {% for team in tournament.teams %}
+            <li>{{ team.name }}</li>
+            {% endfor %}
+        </ul>
+    </section>
     <footer>&copy; JacOps 2020. All rights reserved.</footer>
 <body>
 </body>
