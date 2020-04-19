@@ -8,6 +8,7 @@ RUN set -ex && \
     pip install pyppeteer && \
     pyppeteer-install
 
+
 FROM python:3.7-slim as builder
 
 WORKDIR /install
@@ -17,7 +18,6 @@ COPY src /install/src
 
 RUN set -ex && \
     python setup.py bdist_wheel --universal
-
 
 
 FROM base
@@ -46,5 +46,6 @@ COPY src/worker.py \
      ./
 
 COPY templates ./templates
+COPY samples ./samples
 
 CMD ["python", "worker.py"]

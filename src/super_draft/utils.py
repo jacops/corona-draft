@@ -1,5 +1,6 @@
 import pickle
 import markdown
+from jinja2 import Template
 from pyppeteer import launch
 from google_auth_oauthlib.flow import InstalledAppFlow
 
@@ -44,5 +45,7 @@ async def generate_png(source_path: str, output_path: str, clip: dict = None) ->
 
 def generate_html_from_markdown(content: str, output_path: str) -> None:
     md = markdown.Markdown()
-    with open(output_path, 'w') as f:
-        f.write(md.convert(content))
+    with open('templates/rules.html') as f:
+        with  open(output_path, "wt") as html_file:
+            template = Template(f.read())
+            html_file.write(template.render(rules=md.convert(content)))
