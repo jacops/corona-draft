@@ -85,7 +85,7 @@ class SpreadsheetRepository:
             team_name = sheet.get("properties", {}).get("title", "Unknown Team")
             players_rows = self.api.values().get(
                 spreadsheetId=self.spreadsheet_id,
-                range=team_name + "!A2:D"
+                range=team_name + "!A2:C12"
             ).execute().get('values', [])
 
         return {
@@ -99,7 +99,7 @@ class SpreadsheetRepository:
     def get_team(self, name) -> Team:
         players_rows = self.api.values().get(
             spreadsheetId=self.spreadsheet_id,
-            range=name + "!A2:D"
+            range=name + "!A2:C12"
         ).execute().get('values', [])
 
         return Team(name, list(map(
