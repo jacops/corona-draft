@@ -49,7 +49,7 @@ def fetch_changes() -> None:
 
     tournament = yaml_repository.get_tournament()
 
-    for team in tournament.teams:
+    for idx, team in enumerate(tournament.teams):
         fresh_team = spreadsheet_repository.get_team(team.name)
         team_changes = models.get_team_player_changes(fresh_team, team)
         for new_player in team_changes:
@@ -77,5 +77,7 @@ def fetch_changes() -> None:
             )
 
             team.metadata["tweet_id"] = tweet.id_str
+
+        tournament.teams[idx] = fresh_team
 
     yaml_repository.save_tournament(tournament)
